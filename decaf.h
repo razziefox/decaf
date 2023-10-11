@@ -22,8 +22,8 @@ int decaf_fetch_window_width();
 int decaf_fetch_window_height();
 int decaf_fetch_render_width();
 int decaf_fetch_render_height();
-void decaf_set_modding(bool choice);
-bool decaf_fetch_modding_allowed();
-bool decaf_is_file_exists(const char *filename);
+void decaf_modding_set(bool choice);
+bool decaf_modding_allowed();
+bool decaf_file_exists(const char *filename);
 
 #endif

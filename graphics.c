@@ -23,7 +23,7 @@ SDL_Texture *decaf_graphics_load(char *path) {
 
     printf("%s\n", strarray);
 
-    if (decaf_fetch_modding_allowed() == true && decaf_is_file_exists(path) == true) {
+    if (decaf_modding_allowed() == true && decaf_file_exists(path) == true) {
 
         SDL_Surface *surface = SDL_LoadBMP(path);
 

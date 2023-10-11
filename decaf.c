@@ -115,9 +115,9 @@ void decaf_update(void (*update)(float dt), void (*draw)(void)) {
 
         //update();
 
-        if(is_key_pressed(DECAF_KEY_ESCAPE)) { running = false;}
+        if(decaf_key_pressed(DECAF_KEY_ESCAPE)) { running = false;}
 
-        if(is_key_pressed(DECAF_KEY_F4) || is_key_pressed(DECAF_KEY_F11)) { decaf_toggle_fullscreen(); }
+        if(decaf_key_pressed(DECAF_KEY_F4) || decaf_key_pressed(DECAF_KEY_F11)) { decaf_toggle_fullscreen(); }
 
         //clears out the screen
         SDL_RenderClear(decaf_get_renderer());
@@ -275,19 +275,19 @@ int decaf_fetch_render_height() {
 
 }
 
-void decaf_set_modding(bool choice) {
+void decaf_modding_set(bool choice) {
 
     allow_mods = choice;
 
 }
 
-bool decaf_fetch_modding_allowed() {
+bool decaf_modding_allowed() {
 
     return allow_mods;
 
 }
 
-bool decaf_is_file_exists(const char *filename) {
+bool decaf_file_exists(const char *filename) {
 
     FILE *file = fopen(filename, "r");
     
