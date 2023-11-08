@@ -3,9 +3,20 @@ decaf is an experimental minimal game framework for C. Entirely software-rendere
 
 ## dependencies
 * sdl2
-* sdl_image
 * sdl_mixer
 * sdl_ttf
+
+
+## Planned Changes
+
+- [ ] Initial Code Structure
+- [ ] Controller Support
+- [ ] Console Support (Switch, Xbox, Playstation, Etc)
+- [ ] Full Commercial Title made with Decaf
+- [ ] Proper Examples
+- [ ] SDL3 Support
+- [ ] Basic Texture Modding Support
+- [ ] Transition to miniaudio from sdl_mixer
 
 
 ## example
