@@ -1,10 +1,8 @@
 #include "input.h"
 
+const Uint8 *keyState;
+
 bool decaf_key_pressed(Uint32 key) {
-
-    const Uint8 *keyState;
-
-    keyState = SDL_GetKeyboardState(NULL);
 
     if(keyState[key]) {
 
@@ -15,6 +13,12 @@ bool decaf_key_pressed(Uint32 key) {
             return false;
     
     }
+
+}
+
+void decaf_set_KeyboardState() {
+
+    keyState = SDL_GetKeyboardState(NULL);
 
 }
 

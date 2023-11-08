@@ -93,5 +93,6 @@ enum input_flags {
 bool decaf_key_pressed(Uint32 key);
 int decaf_fetch_mouse_x();
 int decaf_fetch_mouse_y();
+void decaf_set_KeyboardState();
 
 #endif
