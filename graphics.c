@@ -1,8 +1,7 @@
 #include "graphics.h"
 
+// sets background color (deprecated)
 void decaf_set_bg_color(int r, int g, int b) {
-
-    //SDL_Renderer *renderer = decaf_get_renderer();
 
     SDL_SetRenderDrawColor(decaf_get_renderer(), r, g, b, 255);
     SDL_Rect rect = {0, 0, 256, 144};
@@ -12,7 +11,7 @@ void decaf_set_bg_color(int r, int g, int b) {
     
 }
 
-//function to load images using sdl_image
+// loads bmp file from given path
 SDL_Texture *decaf_graphics_load(char *path) {
 
     char strarray[256] = "test";
@@ -53,7 +52,7 @@ SDL_Texture *decaf_graphics_load(char *path) {
 }
 
 
-//functon to draw images using sdl_image
+// draws texture
 void decaf_graphics_image(SDL_Texture *texture, SDL_Rect *rect) {
 
     //draws the texture onto the renderer
@@ -62,6 +61,7 @@ void decaf_graphics_image(SDL_Texture *texture, SDL_Rect *rect) {
 
 }
 
+// draws texture with float values
 void decaf_graphics_imagef(SDL_Texture *texture, SDL_FRect *rect) {
 
     SDL_RenderCopyF(decaf_get_renderer(), texture, NULL, rect);
@@ -69,6 +69,7 @@ void decaf_graphics_imagef(SDL_Texture *texture, SDL_FRect *rect) {
 
 }
 
+// draws sprite from cell
 void decaf_graphics_sprite(SDL_Texture *texture, int cell, SDL_Rect *rect) {
 
     struct spriteData {
@@ -85,6 +86,7 @@ void decaf_graphics_sprite(SDL_Texture *texture, int cell, SDL_Rect *rect) {
 
 }
 
+// draws sprite from cell with float values
 void decaf_graphics_spritef(SDL_Texture *texture, int cell, SDL_FRect *rect) {
 
     struct spriteData {
@@ -101,6 +103,7 @@ void decaf_graphics_spritef(SDL_Texture *texture, int cell, SDL_FRect *rect) {
 
 }
 
+// frees texture from memory
 void destroy_texture(SDL_Texture *texture) {
 
     SDL_DestroyTexture(texture);

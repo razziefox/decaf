@@ -2,6 +2,7 @@
 
 const Uint8 *keyState;
 
+// checks if key is pressed
 bool decaf_key_pressed(Uint32 key) {
 
     if(keyState[key]) {
@@ -16,12 +17,14 @@ bool decaf_key_pressed(Uint32 key) {
 
 }
 
+// sets the current keystate
 void decaf_set_KeyboardState() {
 
     keyState = SDL_GetKeyboardState(NULL);
 
 }
 
+// returns the current mouse position x
 int decaf_fetch_mouse_x() {
 
     int x, y;
@@ -34,6 +37,7 @@ int decaf_fetch_mouse_x() {
 
 }
 
+// returns the current mouse position y
 int decaf_fetch_mouse_y() {
 
     int x, y;

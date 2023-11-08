@@ -7,7 +7,7 @@ decaf is an experimental minimal game framework for C. Entirely software-rendere
 * sdl_ttf
 
 
-## Planned Changes
+## planned changes
 
 - [ ] Initial Code Structure
 - [ ] Controller Support

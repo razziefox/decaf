@@ -9,7 +9,7 @@ bool is_focus = true;
 
 int decaf_init(char *title, int logic_width, int logic_height, int scale) {
 
-    //starts up sdl2
+    // starts up sdl + sdl_mixer and checks for any errors
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0) {
 
         printf("Error with starting sdl2! More details: %s", SDL_GetError());
@@ -17,6 +17,7 @@ int decaf_init(char *title, int logic_width, int logic_height, int scale) {
 
     }
 
+    // checks platform for specific flags
     #ifdef __APPLE__
         Uint32 flags = SDL_WINDOW_METAL | SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI;
     #elif __linux__
@@ -33,11 +34,10 @@ int decaf_init(char *title, int logic_width, int logic_height, int scale) {
         Uint32 flags = SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE;
     #endif
 
+    // creates new sdl window
     window = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, logic_width*scale, logic_height*scale, flags);
 
-    //*decaf_window = *window;
-
-    //checks if window variable is null
+    // checks if window variable is null
     if (window == NULL) {
 
         //displays error screen and quits out
@@ -46,7 +46,7 @@ int decaf_init(char *title, int logic_width, int logic_height, int scale) {
 
     }
 
-    // Create a renderer (accelerated and in sync with the display refresh rate)
+    // create a renderer (accelerated and in sync with the display refresh rate)
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
     if (renderer == NULL) {
@@ -57,18 +57,17 @@ int decaf_init(char *title, int logic_width, int logic_height, int scale) {
 
     }
     
-    //sets renderer resolution (this is important for locking a aspect ratio!)
+    // sets renderer resolution (this is important for locking a aspect ratio!)
     SDL_RenderSetLogicalSize(renderer, logic_width, logic_height);
 
     // sets integer scaling
     SDL_RenderSetIntegerScale(renderer, true);
 
+    // sets scale quality to "0", allowing pixels to show
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0");
 
-    //sets background color
+    // sets background color
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-
-    //printf("refresh rate: %d\n", decaf_fetch_display_refreshrate());
 
     return 0;
 
@@ -151,6 +150,7 @@ void decaf_update(void (*update)(float dt), void (*draw)(void)) {
 
 }
 
+// destroys itself (decaf)
 int decaf_quit(void (*destroy)(void)) {
 
     destroy();
@@ -161,35 +161,36 @@ int decaf_quit(void (*destroy)(void)) {
 
 }
 
+// returns back the current renderer
 SDL_Renderer *decaf_get_renderer() {
 
     return renderer;
 
 }
 
+// returns back the current window
 SDL_Window *decaf_get_window() {
 
     return window;
 
 }
 
+// toggles fullscreen
 void decaf_toggle_fullscreen() {
 
-    bool isFullscreen = SDL_GetWindowFlags(window) & SDL_WINDOW_FULLSCREEN;
-
-    //toggles between fullscreen and windowed
-    SDL_SetWindowFullscreen(window, !isFullscreen ? SDL_WINDOW_FULLSCREEN_DESKTOP:0);
+    // sets the fullscreen state opposite of what the current fullscreen state is
+    SDL_SetWindowFullscreen(window, !decaf_is_fullscreen() ? SDL_WINDOW_FULLSCREEN_DESKTOP:0);
 
 }
 
+// returns the value of the fullscreen state
 bool decaf_is_fullscreen() {
-
-    //printf("window state: %s", fullscreenlol ? "fullscreen" : "windowed");
 
     return SDL_GetWindowFlags(window) & SDL_WINDOW_FULLSCREEN;
 
 }
 
+// sets the window title
 char decaf_set_window_title(char *title) {
 
     SDL_SetWindowTitle(window, title);
@@ -198,6 +199,7 @@ char decaf_set_window_title(char *title) {
 
 }
 
+// loads and sets the window icon
 char decaf_set_window_icon(char *path) {
 
     SDL_Surface *icon = SDL_LoadBMP(path);
@@ -215,17 +217,21 @@ char decaf_set_window_icon(char *path) {
 
 }
 
+// sets the window size
 void decaf_set_window_size(int width, int height) {
 
     SDL_SetWindowSize(window, width, height);
 
 }
 
+// sets the windows position
 void decaf_set_window_position(int x, int y) {
 
     SDL_SetWindowPosition(window, x, y);
 
 }
+
+// returns back the current refresh rate
 int decaf_fetch_display_refreshrate() {
 
     SDL_DisplayMode mode;
@@ -234,18 +240,21 @@ int decaf_fetch_display_refreshrate() {
 
 }
 
+// returns back the current scale
 int decaf_fetch_scale() {
 
     return SDL_RenderGetIntegerScale(renderer);
 
 }
 
+// returns back the current window size (unfinished)
 int decaf_fetch_window_size(){
 
     return 0;
 
 }
 
+// returns back the current window width
 int decaf_fetch_window_width(){
 
     int w;
@@ -257,6 +266,7 @@ int decaf_fetch_window_width(){
 
 }
 
+// returns back the current window height
 int decaf_fetch_window_height() {
 
     int w;
@@ -264,11 +274,11 @@ int decaf_fetch_window_height() {
 
     SDL_GetWindowSize(window, &w, &h);
 
-
     return h;
 
 }
 
+// returns back the current width from the renderer
 int decaf_fetch_render_width() {
 
     int w;
@@ -281,6 +291,7 @@ int decaf_fetch_render_width() {
 
 }
 
+// returns back the current height from the renderer
 int decaf_fetch_render_height() {
 
     int w;
@@ -293,18 +304,21 @@ int decaf_fetch_render_height() {
 
 }
 
+// sets current modding state
 void decaf_modding_set(bool choice) {
 
     allow_mods = choice;
 
 }
 
+// returns back the value of modding state
 bool decaf_modding_allowed() {
 
     return allow_mods;
 
 }
 
+// checks if a file exists
 bool decaf_file_exists(const char *filename) {
 
     FILE *file = fopen(filename, "r");

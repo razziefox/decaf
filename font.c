@@ -1,17 +1,20 @@
 #include "font.h"
 
+// initialize sdl_ttf
 void decaf_font_init() {
 
     TTF_Init();
 
 }
 
+// closes out sdl_ttf
 void decaf_font_quit() {
 
     TTF_Quit();
 
 }
 
+// loads font from given path and sets font size
 TTF_Font *decaf_font_load(const char* path, int size) {
 
     TTF_Font* font = TTF_OpenFont(path, size);
@@ -19,12 +22,14 @@ TTF_Font *decaf_font_load(const char* path, int size) {
 
 }
 
+// frees font from memory
 void decaf_font_destroy(TTF_Font* font) {
 
     TTF_CloseFont(font);
 
 }
 
+// draws text with given font and color
 void decaf_font_draw(TTF_Font* font, const char* text, int x, int y, decaf_color color) {
 
     SDL_Surface* surface = TTF_RenderText_Solid(font, text, color);
