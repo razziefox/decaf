@@ -7,7 +7,7 @@
 #include "input.h"
 
 int decaf_init(char *title, int logic_width, int logic_height, int scale);
-void decaf_quit(void (*destroy)(void));
+int decaf_quit(void (*destroy)(void));
 SDL_Renderer *decaf_get_renderer();
 SDL_Window *decaf_get_window();
 void decaf_toggle_fullscreen();
@@ -25,5 +25,6 @@ int decaf_fetch_render_height();
 void decaf_modding_set(bool choice);
 bool decaf_modding_allowed();
 bool decaf_file_exists(const char *filename);
+void decaf_event(SDL_Event event);
 
 #endif

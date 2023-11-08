@@ -5,6 +5,7 @@ SDL_Renderer *renderer;
 bool running = true;
 SDL_Event event;
 bool allow_mods = false;
+bool is_focus = true;
 
 int decaf_init(char *title, int logic_width, int logic_height, int scale) {
 
@@ -73,6 +74,16 @@ int decaf_init(char *title, int logic_width, int logic_height, int scale) {
 
 }
 
+void decaf_event(SDL_Event event) {
+
+    if (event.type == SDL_QUIT) {
+
+        running = false;
+
+    }
+
+}
+
 void decaf_update(void (*update)(float dt), void (*draw)(void)) {
 
     float t = 0.0;
@@ -81,6 +92,9 @@ void decaf_update(void (*update)(float dt), void (*draw)(void)) {
     float currentTime = ((float)(SDL_GetTicks()) / 1000.0f);
     float accumulator = 0.0;
 
+    float newTime = ((float)(SDL_GetTicks()) / 1000.0f);
+    float frameTime = (newTime - currentTime);
+
     //game loop
     while(running) {
 
@@ -88,14 +102,14 @@ void decaf_update(void (*update)(float dt), void (*draw)(void)) {
         while(SDL_PollEvent(&event)) {
 
             //if the event type is SDL_QUIT, then quit game
-            if(event.type == SDL_QUIT) {
-                running = false;
-            }
+            decaf_event(event);
 
         }
 
-        float newTime = ((float)(SDL_GetTicks()) / 1000.0f);
-        float frameTime = (newTime - currentTime);
+        
+
+        newTime = ((float)(SDL_GetTicks()) / 1000.0f);
+        frameTime = (newTime - currentTime);
 
         if (frameTime > 0.25) {
 
@@ -108,6 +122,9 @@ void decaf_update(void (*update)(float dt), void (*draw)(void)) {
 
         //update function for game.c
         while(accumulator >= dt) {
+
+            decaf_set_KeyboardState();
+
             update(dt);
             accumulator -= dt;
             //frameTime -= dt;
@@ -115,9 +132,9 @@ void decaf_update(void (*update)(float dt), void (*draw)(void)) {
 
         //update();
 
-        if(decaf_key_pressed(DECAF_KEY_ESCAPE)) { running = false;}
+        //if(decaf_key_pressed(DECAF_KEY_ESCAPE)) { running = false;}
 
-        if(decaf_key_pressed(DECAF_KEY_F4) || decaf_key_pressed(DECAF_KEY_F11)) { decaf_toggle_fullscreen(); }
+        //if(decaf_key_pressed(DECAF_KEY_F4) || decaf_key_pressed(DECAF_KEY_F11)) { decaf_toggle_fullscreen(); }
 
         //clears out the screen
         SDL_RenderClear(decaf_get_renderer());
@@ -134,12 +151,13 @@ void decaf_update(void (*update)(float dt), void (*draw)(void)) {
 
 }
 
-void decaf_quit(void (*destroy)(void)) {
+int decaf_quit(void (*destroy)(void)) {
 
     destroy();
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
+    return 0;
 
 }
 
