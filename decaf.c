@@ -101,7 +101,11 @@ void decaf_update(void (*update)(float dt), void (*draw)(void)) {
         while(SDL_PollEvent(&event)) {
 
             //if the event type is SDL_QUIT, then quit game
-            decaf_event(event);
+            if (event.type == SDL_QUIT) {
+
+                running = false;
+
+            }
 
         }
 
@@ -162,21 +166,21 @@ int decaf_quit(void (*destroy)(void)) {
 }
 
 // returns back the current renderer
-SDL_Renderer *decaf_get_renderer() {
+SDL_Renderer *decaf_get_renderer(void) {
 
     return renderer;
 
 }
 
 // returns back the current window
-SDL_Window *decaf_get_window() {
+SDL_Window *decaf_get_window(void) {
 
     return window;
 
 }
 
 // toggles fullscreen
-void decaf_toggle_fullscreen() {
+void decaf_toggle_fullscreen(void) {
 
     // sets the fullscreen state opposite of what the current fullscreen state is
     SDL_SetWindowFullscreen(window, !decaf_is_fullscreen() ? SDL_WINDOW_FULLSCREEN_DESKTOP:0);
@@ -184,7 +188,7 @@ void decaf_toggle_fullscreen() {
 }
 
 // returns the value of the fullscreen state
-bool decaf_is_fullscreen() {
+bool decaf_is_fullscreen(void) {
 
     return SDL_GetWindowFlags(window) & SDL_WINDOW_FULLSCREEN;
 
@@ -232,7 +236,7 @@ void decaf_set_window_position(int x, int y) {
 }
 
 // returns back the current refresh rate
-int decaf_fetch_display_refreshrate() {
+int decaf_fetch_display_refreshrate(void) {
 
     SDL_DisplayMode mode;
     SDL_GetCurrentDisplayMode(0, &mode);
@@ -241,21 +245,21 @@ int decaf_fetch_display_refreshrate() {
 }
 
 // returns back the current scale
-int decaf_fetch_scale() {
+int decaf_fetch_scale(void) {
 
     return SDL_RenderGetIntegerScale(renderer);
 
 }
 
 // returns back the current window size (unfinished)
-int decaf_fetch_window_size(){
+int decaf_fetch_window_size(void) {
 
     return 0;
 
 }
 
 // returns back the current window width
-int decaf_fetch_window_width(){
+int decaf_fetch_window_width(void) {
 
     int w;
     int h;
@@ -267,7 +271,7 @@ int decaf_fetch_window_width(){
 }
 
 // returns back the current window height
-int decaf_fetch_window_height() {
+int decaf_fetch_window_height(void) {
 
     int w;
     int h;
@@ -279,7 +283,7 @@ int decaf_fetch_window_height() {
 }
 
 // returns back the current width from the renderer
-int decaf_fetch_render_width() {
+int decaf_fetch_render_width(void) {
 
     int w;
     int h;
@@ -292,7 +296,7 @@ int decaf_fetch_render_width() {
 }
 
 // returns back the current height from the renderer
-int decaf_fetch_render_height() {
+int decaf_fetch_render_height(void) {
 
     int w;
     int h;
@@ -312,7 +316,7 @@ void decaf_modding_set(bool choice) {
 }
 
 // returns back the value of modding state
-bool decaf_modding_allowed() {
+bool decaf_modding_allowed(void) {
 
     return allow_mods;
 

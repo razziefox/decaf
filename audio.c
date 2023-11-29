@@ -1,7 +1,7 @@
 #include "audio.h"
 
 // initializes sdl_mixer
-void decaf_audio_init() {
+void decaf_audio_init(void) {
 
     if(Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096) == -1) {
 
@@ -60,21 +60,21 @@ void decaf_audio_playMusic(Mix_Music *music) {
 }
 
 // stops music thats currently playing
-void decaf_audio_stopMusic() {
+void decaf_audio_stopMusic(void) {
 
     Mix_HaltMusic();
 
 }
 
 // pauses music thats currently playing
-void decaf_audio_pauseMusic() {
+void decaf_audio_pauseMusic(void) {
 
     Mix_PauseMusic();
 
 }
 
 // resumes music that was playing
-void decaf_audio_resumeMusic() {
+void decaf_audio_resumeMusic(void) {
 
     Mix_ResumeMusic();
 
@@ -95,7 +95,7 @@ void decaf_audio_setSoundVolume(int volume) {
 }
 
 // closes out sdl_mixer
-void decaf_audio_quit() {
+void decaf_audio_quit(void) {
 
     Mix_CloseAudio();
 

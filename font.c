@@ -1,14 +1,14 @@
 #include "font.h"
 
 // initialize sdl_ttf
-void decaf_font_init() {
+void decaf_font_init(void) {
 
     TTF_Init();
 
 }
 
 // closes out sdl_ttf
-void decaf_font_quit() {
+void decaf_font_quit(void) {
 
     TTF_Quit();
 

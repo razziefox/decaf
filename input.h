@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 #include <stdbool.h>
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include "decaf.h"
 
 enum input_flags {
@@ -91,8 +91,8 @@ enum input_flags {
 };
 
 bool decaf_key_pressed(Uint32 key);
-int decaf_fetch_mouse_x();
-int decaf_fetch_mouse_y();
-void decaf_set_KeyboardState();
+int decaf_fetch_mouse_x(void);
+int decaf_fetch_mouse_y(void);
+void decaf_set_KeyboardState(void);
 
 #endif

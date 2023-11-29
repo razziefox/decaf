@@ -31,7 +31,7 @@ SDL_Texture *decaf_graphics_load(char *path) {
         SDL_Surface *surface = SDL_LoadBMP(path);
 
     }
-    //loads image onto a surface
+    // loads image onto a surface
     SDL_Surface *surface = SDL_LoadBMP(path);
 
     if (surface != NULL) {
@@ -40,13 +40,13 @@ SDL_Texture *decaf_graphics_load(char *path) {
 
     }
 
-    //converts the surface into a texture
+    // converts the surface into a texture
     SDL_Texture *texture = SDL_CreateTextureFromSurface(decaf_get_renderer(), surface);
 
-    //unloads surface from earlier
+    // unloads surface from earlier
     SDL_FreeSurface(surface);
 
-    //returns back the texture given
+    // returns back the texture given
     return texture;
 
 }
@@ -55,7 +55,7 @@ SDL_Texture *decaf_graphics_load(char *path) {
 // draws texture
 void decaf_graphics_image(SDL_Texture *texture, SDL_Rect *rect) {
 
-    //draws the texture onto the renderer
+    // draws the texture onto the renderer
     SDL_RenderCopy(decaf_get_renderer(), texture, NULL, rect);
     return;
 
