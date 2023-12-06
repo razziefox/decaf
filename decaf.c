@@ -165,6 +165,14 @@ int decaf_quit(void (*destroy)(void)) {
 
 }
 
+// quits game
+int decaf_close(void) {
+
+    running = false;
+    return 0;
+
+}
+
 // returns back the current renderer
 SDL_Renderer *decaf_get_renderer(void) {
 

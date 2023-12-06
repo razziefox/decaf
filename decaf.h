@@ -8,6 +8,7 @@
 
 int decaf_init(char *title, int logic_width, int logic_height, int scale);
 int decaf_quit(void (*destroy)(void));
+int decaf_close(void);
 SDL_Renderer *decaf_get_renderer(void);
 SDL_Window *decaf_get_window(void);
 void decaf_toggle_fullscreen(void);
