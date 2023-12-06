@@ -14,23 +14,6 @@ void decaf_set_bg_color(int r, int g, int b) {
 // loads bmp file from given path
 SDL_Texture *decaf_graphics_load(char *path) {
 
-    char strarray[256] = "test";
-    char another[256];
-
-    strcpy(another, path);
-    strncat(strarray, another, 255);
-
-    printf("%s\n", strarray);
-
-    if (decaf_modding_allowed() == true && decaf_file_exists(path) == true) {
-
-        SDL_Surface *surface = SDL_LoadBMP(path);
-
-    } else {
-
-        SDL_Surface *surface = SDL_LoadBMP(path);
-
-    }
     // loads image onto a surface
     SDL_Surface *surface = SDL_LoadBMP(path);
 
