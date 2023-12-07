@@ -60,6 +60,8 @@ int decaf_init(char *title, int logic_width, int logic_height, int scale) {
     // sets renderer resolution (this is important for locking a aspect ratio!)
     SDL_RenderSetLogicalSize(renderer, logic_width, logic_height);
 
+    SDL_SetWindowMinimumSize(window, logic_width, logic_height);
+
     // sets integer scaling
     SDL_RenderSetIntegerScale(renderer, true);
 
