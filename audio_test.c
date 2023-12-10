@@ -7,6 +7,12 @@
 
 #include "audio_test.h"
 
+/*
+
+NOTICE: This audio backend is still under development! All code here is unfinished and may cause your project to crash
+
+*/
+
 ma_engine engine;
 
 int mini_init(void) {
