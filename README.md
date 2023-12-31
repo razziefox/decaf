@@ -1,5 +1,8 @@
 ## decaf framework
-decaf is an experimental minimal game framework for C. Due to the experimental nature of this framework, its not recommended for use in commercial products yet.
+decaf is an experimental minimal game framework for C.
+
+> [!WARNING]
+> Due to the experimental nature of this framework, its not recommended for use in commercial products yet as this framework may receive code-breaking changes in the future.
 
 
 ## platforms
@@ -13,6 +16,9 @@ decaf is an experimental minimal game framework for C. Due to the experimental n
 * sdl_mixer
 * sdl_ttf
 * miniaudio (included in project)
+  
+> [!IMPORTANT]
+> miniaudio is replacing sdl_mixer in the future. sdl_mixer as a required dependency will be dropped. 
 
 
 ## road map
